@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   belongs_to :board
 
+  has_many :game_pieces, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true, email_format: true
 
   def full_name
