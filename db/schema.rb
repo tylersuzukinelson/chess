@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20150309201826) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "boards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "player1"
+    t.integer  "player2"
+    t.integer  "player1_id"
+    t.integer  "player2_id"
+  end
+
+  add_index "boards", ["player1_id"], name: "index_boards_on_player1_id", using: :btree
+  add_index "boards", ["player2_id"], name: "index_boards_on_player2_id", using: :btree
+
   create_table "game_pieces", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",      null: false
@@ -46,4 +58,6 @@ ActiveRecord::Schema.define(version: 20150309201826) do
     t.datetime "updated_at",              null: false
   end
 
+  add_foreign_key "boards", "users", column: "player1"
+  add_foreign_key "boards", "users", column: "player2"
 end
