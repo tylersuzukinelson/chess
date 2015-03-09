@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if auth_hash
+    if request.env['omniauth.auth']
       user = User.omniauth(env['omniauth.auth'])
       session[:user_id] = user.id
       redirect_to root_url
