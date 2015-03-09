@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  belongs_to :board
+
   validates :email, presence: true, uniqueness: true, email_format: true
 
   def full_name
