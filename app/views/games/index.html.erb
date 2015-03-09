@@ -2,15 +2,31 @@
   <% row = 0 %>
   <% cols = 0 %>
   <% @coords.each do |coord| %> 
-    <div class="row"><%= "#{coord.row} #{coord.column}" %></div>
+    <% if row.odd? && cols.odd? %>
+      <div class="grid grey">
+        <%= "#{coord.row} #{coord.column}" %>
+        <%= coord.game_piece.name unless !coord.game_piece %>
+      </div>
+    <% else %>
+      <% if row.even? && cols.even? %>
+        <div class="grid grey">
+            <%= "#{coord.row} #{coord.column}" %>
+            <%= coord.game_piece.name unless !coord.game_piece %>
+        </div>
+      <% else %>
+         <div class="grid">
+            <%= "#{coord.row} #{coord.column}" %>
+            <%= coord.game_piece.name unless !coord.game_piece %>
+        </div>
+      <% end %>
+    <% end %>
+      
     <% row += 1 %>
     <% if row == 8 %>
       <br>
-      <% 
-        row = 0 
-        cols += 1
-      %>
+      <% row = 0; cols += 1 %>
     <% end %>
+
   <% end %>
 
 </div>
