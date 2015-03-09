@@ -2,7 +2,7 @@
   <% row = 0 %>
   <% cols = 0 %>
   <% @coords.each do |coord| %> 
-    <div class="row"><%= "#{coord.row} #{coord.column}" %></div>
+    <div class="grid"><%= "#{coord.row} #{coord.column}" %></div>
     <% row += 1 %>
     <% if row == 8 %>
       <br>
