@@ -29,4 +29,18 @@ ActiveRecord::Schema.define(version: 20150309190506) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "twitter_consumer_token"
+    t.string   "twitter_consumer_secret"
+    t.text     "omniauth_raw_data"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
 end

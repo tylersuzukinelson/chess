@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  password_digest: MyString
+  first_name: MyString
+  last_name: MyString
+  provider: MyString
+  uid: MyString
+  twitter_consumer_token: MyString
+  twitter_consumer_secret: MyString
+  omniauth_raw_data: MyText
+
+two:
+  email: MyString
+  password_digest: MyString
+  first_name: MyString
+  last_name: MyString
+  provider: MyString
+  uid: MyString
+  twitter_consumer_token: MyString
+  twitter_consumer_secret: MyString
+  omniauth_raw_data: MyText
