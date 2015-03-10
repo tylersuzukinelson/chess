@@ -35,7 +35,7 @@ class GamePiecesController < ApplicationController
       get_knight_down_moves(row, column),  
       get_knight_left_moves(row, column),
       get_knight_right_moves(row, column)
-    ].compact
+    ].reject! { |set| set.empty? }.flatten(1)
   end
 
   def get_knight_up_moves(row, column)
