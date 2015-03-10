@@ -15,6 +15,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'valid_email'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'simple_form'
+
 
 group :development, :test do
   gem 'interactive_editor'
