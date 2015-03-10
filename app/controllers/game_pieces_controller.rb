@@ -20,6 +20,8 @@ class GamePiecesController < ApplicationController
       @possible_moves = get_bishop_moves(game_piece.row, game_piece.column)
     elsif game_piece.name.downcase == "rook"
       @possible_moves = get_rook_moves(game_piece.row, game_piece.column)
+    elsif game_piece.name.downcase == "queen"
+      @possible_moves = get_queen_moves(game_piece.row, game_piece.column)
     end
   end
 
@@ -365,4 +367,126 @@ private
     end  
     output.compact  
   end
+
+  #Queen moves
+  def get_queen_moves(row, column)
+    tmp = [
+      get_queen_horizontal_moves(row, column).flatten(1),
+      get_queen_vertical_moves(row, column).flatten(1),
+      get_queen_diagonal_right_moves(row, column).flatten(1),
+      get_queen_diagonal_left_moves(row, column).flatten(1)
+    ].flatten(1)
+  end
+
+  def get_queen_horizontal_moves(row, column)
+    [
+      get_queen_right_moves(row, column),
+      get_queen_left_moves(row, column)
+    ]
+  end
+
+  def get_queen_vertical_moves(row, column)
+    [
+      get_queen_up_moves(row, column), 
+      get_queen_down_moves(row, column)
+    ]
+  end
+
+  # queen horizontal moves
+  def get_queen_right_moves(row, column)
+    output = []
+    while column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+    end  
+    output.compact
+  end
+
+  def get_queen_left_moves(row, column)
+    output = []
+    while column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+    end  
+    output.compact    
+  end
+
+  # queen vertical moves
+  def get_queen_up_moves(row, column)
+    output = []
+    while row >= 1
+      output << [row, column] if is_valid_position(row, column)      
+      row -= 1 
+    end  
+    output.compact      
+  end
+
+  def get_queen_down_moves(row, column)
+    output = []
+    while row <= 8
+      output << [row, column] if is_valid_position(row, column)      
+      row += 1 
+    end  
+    output.compact  
+  end
+
+  #queen diagonal moves
+  def get_queen_diagonal_right_moves(row, column)
+    [
+      get_queen_ne_moves(row, column),
+      get_queen_se_moves(row, column)
+    ].compact
+  end 
+
+  def get_queen_diagonal_left_moves(row, column)
+    [
+      get_queen_nw_moves(row, column),
+      get_queen_sw_moves(row, column)
+    ].compact
+  end 
+
+  #queen NE moves
+  def get_queen_ne_moves(row, column)
+    output = []
+    while row >= 1 && column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+      row -= 1
+    end  
+    output.compact
+  end
+
+  #queen SE moves
+  def get_queen_se_moves(row, column)
+    output = []
+    while row <= 8 && column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+      row += 1
+    end  
+    output.compact
+  end
+
+  #queen NW moves
+  def get_queen_nw_moves(row, column)
+    output = []
+    while row >= 1 && column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+      row -= 1
+    end  
+    output.compact
+  end
+ 
+  #queen SW moves
+  def get_queen_sw_moves(row, column)
+    output = []
+    while row <= 8 && column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+      row += 1
+    end  
+    output.compact
+  end
+
 end
