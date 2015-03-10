@@ -1,7 +1,7 @@
 class GamePiecesController < ApplicationController
 
   def get_move_set
-    game_piece = GamePiece.find params[:id]
+    game_piece = GamePiece.find params[:game_piece_id]
     @possible_moves = [];
     if game_piece.name == "knight"
       @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
@@ -12,6 +12,7 @@ class GamePiecesController < ApplicationController
       else
         #pawn has already moved before
         @possible_moves = get_pawn_moves(game_piece.row, game_piece.column)
+      end
     elsif game_piece.name == "king"
       @possible_moves = get_king_moves(game_piece.row, game_piece.column)
     end
@@ -22,20 +23,24 @@ class GamePiecesController < ApplicationController
   def is_valid_position(row, column)
     valid_rows = [1,2,3,4,5,6,7,8]
     valid_columns = ['a','b','c','d','e','f','g','h']
-    valid_rows.include? row && valid_columns.include? column
+    valid_rows.include?(row) && valid_columns.include?(column)
   end
 
   #knight moves
   def get_knight_moves(row, column)
-    get_knight_up_moves(row, column) + 
-    get_knight_down_moves(row, column) + 
-    get_knight_left_moves(row, column) + 
-    get_knight_right_moves(row, column)
+    [
+      get_knight_up_moves(row, column), 
+      get_knight_down_moves(row, column),  
+      get_knight_left_moves(row, column),
+      get_knight_right_moves(row, column)
+    ].compact
   end
 
   def get_knight_up_moves(row, column)
-    get_knight_up_left_moves(row, column) +
-    get_knight_up_right_moves(row, column)
+    [
+      get_knight_up_left_moves(row, column), 
+      get_knight_up_right_moves(row, column)
+    ].compact
   end
 
   def get_knight_up_left_moves(row, column)
@@ -51,8 +56,10 @@ class GamePiecesController < ApplicationController
   end
 
   def get_knight_down_moves(row, column)
-    get_knight_down_left_moves(row, column) +
-    get_knight_down_right_moves(row, column)
+    [
+      get_knight_down_left_moves(row, column),
+      get_knight_down_right_moves(row, column)
+    ].compact
   end
 
   def get_knight_down_left_moves(row, column)
@@ -68,8 +75,10 @@ class GamePiecesController < ApplicationController
   end
 
   def get_knight_left_moves(row, column)
-    get_knight_left_up_moves(row, column) +
-    get_knight_left_down_moves(row, column)
+    [
+      get_knight_left_up_moves(row, column), 
+      get_knight_left_down_moves(row, column)
+    ].compact
   end
 
   def get_knight_left_up_moves(row, column)
@@ -85,8 +94,10 @@ class GamePiecesController < ApplicationController
   end
 
   def get_knight_right_moves(row, column)
-    get_knight_right_up_moves(row, column) +
-    get_knight_right_down_moves(row, column)
+    [
+      get_knight_right_up_moves(row, column), 
+      get_knight_right_down_moves(row, column)
+    ].compact
   end
 
   def get_knight_right_up_moves(row, column)
@@ -108,13 +119,17 @@ class GamePiecesController < ApplicationController
   end
 
   def get_pawn_up_moves(row, column)
-    get_pawn_up_one(row, column) +
-    get_pawn_up_two(row, column) 
+    [
+      get_pawn_up_one(row, column), 
+      get_pawn_up_two(row, column)
+    ].compact
   end
 
   def get_pawn_diagonal_moves(row, column)
-    get_pawn_diagonal_right(row, column) +
-    get_pawn_diagonal_left(row, column) 
+    [
+      get_pawn_diagonal_right(row, column), 
+      get_pawn_diagonal_left(row, column)
+    ].compact
   end
 
   def get_pawn_up_one(row, column)
@@ -143,11 +158,13 @@ class GamePiecesController < ApplicationController
 
   #king moves
   def get_king_moves(row, column)
-    get_king_up_moves(row, column) + 
-    get_king_down_moves(row, column) + 
-    get_king_left_moves(row, column) + 
-    get_king_right_moves(row, column) + 
-    get_king_diagonal_moves(row, column)
+    [
+      get_king_up_moves(row, column), 
+      get_king_down_moves(row, column), 
+      get_king_left_moves(row, column), 
+      get_king_right_moves(row, column), 
+      get_king_diagonal_moves(row, column)
+    ].compact
   end
 
   def get_king_up_moves(row, column)
@@ -175,10 +192,12 @@ class GamePiecesController < ApplicationController
   end
 
   def get_king_diagonal_moves(row, column)
-    get_king_nw_moves(row, column) + 
-    get_king_ne_moves(row, column) + 
-    get_king_sw_moves(row, column) +
-    get_king_se_moves(row, column)
+    [
+      get_king_nw_moves(row, column), 
+      get_king_ne_moves(row, column), 
+      get_king_sw_moves(row, column),
+      get_king_se_moves(row, column)
+    ].compact
   end
 
   def get_king_nw_moves(row, column)

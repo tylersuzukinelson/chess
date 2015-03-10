@@ -25,6 +25,8 @@ class GamesController < ApplicationController
     coord27 = BoardSquare.where(row: 7, column: "g").first
     coord28 = BoardSquare.where(row: 7, column: "h").first
 
+    coord29 = BoardSquare.where(row: 8, column: "e").first
+
     GamePiece.create(name: "pawn", board_square_id: coord11.id)
     GamePiece.create(name: "pawn", board_square_id: coord12.id)
     GamePiece.create(name: "pawn", board_square_id: coord13.id)
@@ -42,6 +44,8 @@ class GamesController < ApplicationController
     GamePiece.create(name: "pawn", board_square_id: coord26.id)
     GamePiece.create(name: "pawn", board_square_id: coord27.id)
     GamePiece.create(name: "pawn", board_square_id: coord28.id)
+
+    GamePiece.create(name: "king", board_square_id: coord29.id)
   end
 
 end

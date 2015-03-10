@@ -2,9 +2,9 @@
   <% row = 0 %>
   <% cols = 0 %>
   <% @coords.each do |coord| %>
-    <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>" id="<%= "#{coord.row} #{coord.column}" %>">
+    <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>" id="<%= "#{coord.row}_#{coord.column}" %>">
       <% if coord.game_piece %>
-        <%= coord.game_piece.name %>
+        <%= link_to coord.game_piece.name, board_game_piece_get_move_set_path(1, coord.game_piece), remote: true %>
       <% else %>
         <%= "#{coord.row} #{coord.column}" %>
       <% end %>
