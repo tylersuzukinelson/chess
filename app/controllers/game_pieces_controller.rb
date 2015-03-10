@@ -17,7 +17,7 @@ class GamePiecesController < ApplicationController
     elsif game_piece.name == "king"
       @possible_moves = get_king_moves(game_piece.row, game_piece.column)
     elsif game_piece.name.downcase == "bishop"
-      
+      @possible_moves = get_bishop_moves(game_piece.row, game_piece.column)
     end
   end
 
@@ -230,65 +230,68 @@ class GamePiecesController < ApplicationController
   end
 
   #bishop moves
+  def get_bishop_moves(row, column)
+    tmp = [
+      get_bishop_diagonal_right_moves(row, column).flatten(1),
+      get_bishop_diagonal_left_moves(row, column).flatten(1)
+    ].flatten(1)
+  end
+
   def get_bishop_diagonal_right_moves(row, column)
-    get_bishop_ne_moves(row, column) +
-    get_bishop_se_moves(row, column)
+    [
+      get_bishop_ne_moves(row, column),
+      get_bishop_se_moves(row, column)
+    ].compact
   end 
 
   def get_bishop_diagonal_left_moves(row, column)
-    get_bishop_nw_moves(row, column) +
-    get_bishop_sw_moves(row, column)
+    [
+      get_bishop_nw_moves(row, column),
+      get_bishop_sw_moves(row, column)
+    ].compact
   end 
 
   #bishop NE moves
   def get_bishop_ne_moves(row, column)
-    while row >= 1
-      while column <= 8
-        new_row = row
-        new_column = (column.ord).chr
-        [new_row, new_column] if is_valid_position(new_row, new_column)      
-        column += 1
-        row -= 1
-      end
+    output = []
+    while row >= 1 && column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+      row -= 1
     end  
+    output.compact
   end
 
   #bishop SE moves
   def get_bishop_se_moves(row, column)
-    while row <= 8
-      while column <= 8
-        new_row = row
-        new_column = (column.ord).chr
-        [new_row, new_column] if is_valid_position(new_row, new_column)      
-        column += 1
-        row += 1
-      end
+    output = []
+    while row <= 8 && column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+      row += 1
     end  
+    output.compact
   end
 
   #bishop NW moves
   def get_bishop_nw_moves(row, column)
-    while row >= 1
-      while column >= 1
-        new_row = row
-        new_column = (column.ord).chr
-        [new_row, new_column] if is_valid_position(new_row, new_column)      
-        column -= 1
-        row -= 1
-      end
+    output = []
+    while row >= 1 && column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+      row -= 1
     end  
+    output.compact
   end
  
   #bishop SW moves
   def get_bishop_sw_moves(row, column)
-    while row <= 8
-      while column >= 1
-        new_row = row
-        new_column = (column.ord).chr
-        [new_row, new_column] if is_valid_position(new_row, new_column)      
-        column -= 1
-        row += 1
-      end
+    output = []
+    while row <= 8 && column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+      row += 1
     end  
+    output.compact
   end
 end
