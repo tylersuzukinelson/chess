@@ -242,7 +242,7 @@ private
 
   #bishop moves
   def get_bishop_moves(row, column)
-    tmp = [
+    [
       get_bishop_diagonal_right_moves(row, column).flatten(1),
       get_bishop_diagonal_left_moves(row, column).flatten(1)
     ].flatten(1)
@@ -315,17 +315,21 @@ private
   end
 
   def get_rook_horizontal_moves(row, column)
-    get_rook_right_moves(row, column).flatten(1)
-    get_rook_left_moves(row, column).flatten(1)
+    [
+      get_rook_right_moves(row, column),
+      get_rook_left_moves(row, column)
+    ]
   end
 
   def get_rook_vertical_moves(row, column)
-    get_rook_up_moves(row, column).flatten(1)
-    get_rook_down_moves(row, column).flatter(1)
+    [
+      get_rook_up_moves(row, column), 
+      get_rook_down_moves(row, column)
+    ]
   end
 
   # rook horizontal moves
-  def get_rook_right_moves(row, colum)
+  def get_rook_right_moves(row, column)
     output = []
     while column.ord <= 104
       output << [row, column] if is_valid_position(row, column)      
@@ -334,7 +338,7 @@ private
     output.compact
   end
 
-  def get_rook_left_moves(row, colum)
+  def get_rook_left_moves(row, column)
     output = []
     while column.ord >= 97
       output << [row, column] if is_valid_position(row, column)      
@@ -344,7 +348,7 @@ private
   end
 
   # rook vertical moves
-  def get_rook_up_moves(row, colum)
+  def get_rook_up_moves(row, column)
    output = []
     while row >= 1
       output << [row, column] if is_valid_position(row, column)      
@@ -353,7 +357,7 @@ private
     output.compact      
   end
 
-  def get_rook_down_moves(row, colum)
+  def get_rook_down_moves(row, column)
    output = []
     while row <= 8
       output << [row, column] if is_valid_position(row, column)      
