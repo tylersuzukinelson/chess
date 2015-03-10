@@ -1,34 +1,14 @@
 <div>
   <% row = 0 %>
   <% cols = 0 %>
-  <% @coords.each do |coord| %> 
-    <% if row.odd? && cols.odd? %>
-      <div class="grid grey">
-        <% if coord.game_piece %>
-          <%= coord.game_piece.name %>
-        <% else %>
-          <%= "#{coord.row} #{coord.column}" %>
-        <% end %>
-      </div>
-    <% else %>
-      <% if row.even? && cols.even? %>
-        <div class="grid grey">
-          <% if coord.game_piece %>
-            <%= coord.game_piece.name %>
-          <% else %>
-            <%= "#{coord.row} #{coord.column}" %>
-          <% end %>
-        </div>
+  <% @coords.each do |coord| %>
+    <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>">
+      <% if coord.game_piece %>
+        <%= coord.game_piece.name %>
       <% else %>
-         <div class="grid">
-          <% if coord.game_piece %>
-            <%= coord.game_piece.name %>
-          <% else %>
-            <%= "#{coord.row} #{coord.column}" %>
-          <% end %>
-        </div>
+        <%= "#{coord.row} #{coord.column}" %>
       <% end %>
-    <% end %>
+    </div>
       
     <% row += 1 %>
     <% if row == 8 %>
