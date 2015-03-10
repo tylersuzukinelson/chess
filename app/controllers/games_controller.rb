@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
   def index
     GamePiece.destroy_all
     reset_pawn
@@ -9,6 +10,8 @@ class GamesController < ApplicationController
     reset_queen
     @coords = BoardSquare.all
   end
+
+  private
 
   def reset_pawn
     coord11 = BoardSquare.where(row: 2, column: "a").first

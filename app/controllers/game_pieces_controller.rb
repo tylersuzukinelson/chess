@@ -21,6 +21,15 @@ class GamePiecesController < ApplicationController
     end
   end
 
+  def move
+    @game_piece = GamePiece.find params[:game_piece_id]
+    board_square = BoardSquare.where("row = ? AND column = ?", params[:row], params[:column])
+    if board_square.game_piece.exists?
+      board_square.game_piece.destroy
+    end
+    @game_piece.update(board_square_id: board_square.id)
+  end
+
   private
 
   def is_valid_position(row, column)

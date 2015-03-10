@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :boards, only: [] do
     resources :game_pieces, only: [] do
       get '/get_move_set', to: 'game_pieces#get_move_set'
+      patch '/move', to: 'game_pieces#move'
     end
   end
 
