@@ -1,12 +1,16 @@
 class GamesController < ApplicationController
   def index
-    reset_pieces
+    GamePiece.destroy_all
+    reset_pawn
+    reset_rook
+    reset_horse
+    reset_bishop
+    reset_king
+    reset_queen
     @coords = BoardSquare.all
   end
 
-  def reset_pieces
-    GamePiece.destroy_all
-
+  def reset_pawn
     coord11 = BoardSquare.where(row: 2, column: "a").first
     coord12 = BoardSquare.where(row: 2, column: "b").first
     coord13 = BoardSquare.where(row: 2, column: "c").first
@@ -47,5 +51,58 @@ class GamesController < ApplicationController
 
     GamePiece.create(name: "king", board_square_id: coord29.id)
   end
+
+  def reset_rook
+    coord1 = BoardSquare.first
+    coord2 = BoardSquare.where(row: 1, column: "h").first
+    coord3 = BoardSquare.where(row: 8 , column: "a").first
+    coord4 = BoardSquare.last
+
+    GamePiece.create(name: "rook", board_square_id: coord1.id)
+    GamePiece.create(name: "rook", board_square_id: coord2.id)
+    GamePiece.create(name: "rook", board_square_id: coord3.id)
+    GamePiece.create(name: "rook", board_square_id: coord4.id)
+  end
+
+  def reset_horse
+    coord1 = BoardSquare.where(row: 1, column: "b").first
+    coord2 = BoardSquare.where(row: 1, column: "g").first
+    coord3 = BoardSquare.where(row: 8, column: "b").first
+    coord4 = BoardSquare.where(row: 8, column: "g").first
+
+    GamePiece.create(name: "horse", board_square_id: coord1.id)
+    GamePiece.create(name: "horse", board_square_id: coord2.id)
+    GamePiece.create(name: "horse", board_square_id: coord3.id)
+    GamePiece.create(name: "horse", board_square_id: coord4.id)
+  end
+
+  def reset_bishop
+    coord1 = BoardSquare.where(row: 1, column: "c").first
+    coord2 = BoardSquare.where(row: 1, column: "f").first
+    coord3 = BoardSquare.where(row: 8, column: "c").first
+    coord4 = BoardSquare.where(row: 8, column: "f").first
+
+    GamePiece.create(name: "bishop", board_square_id: coord1.id)
+    GamePiece.create(name: "bishop", board_square_id: coord2.id)
+    GamePiece.create(name: "bishop", board_square_id: coord3.id)
+    GamePiece.create(name: "bishop", board_square_id: coord4.id)
+  end
+
+  def reset_queen
+    coord1 = BoardSquare.where(row: 1, column: "d").first
+    coord2 = BoardSquare.where(row: 8, column: "d").first
+
+    GamePiece.create(name: "queen", board_square_id: coord1.id)
+    GamePiece.create(name: "queen", board_square_id: coord2.id)
+  end
+
+  def reset_king
+    coord1 = BoardSquare.where(row: 1, column: "e").first
+    coord2 = BoardSquare.where(row: 8, column: "e").first
+
+    GamePiece.create(name: "king", board_square_id: coord1.id)
+    GamePiece.create(name: "king", board_square_id: coord2.id)
+  end
+
 
 end

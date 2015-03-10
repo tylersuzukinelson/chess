@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   
   # Routes for omniauth login
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create', as: 'fb_login'
   get 'logout', to: 'sessions#destroy'
 end
