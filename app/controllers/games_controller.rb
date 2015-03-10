@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     GamePiece.destroy_all
     reset_pawn
     reset_rook
-    reset_horse
+    reset_knight
     reset_bishop
     reset_king
     reset_queen
@@ -64,16 +64,16 @@ class GamesController < ApplicationController
     GamePiece.create(name: "rook", board_square_id: coord4.id)
   end
 
-  def reset_horse
+  def reset_knight
     coord1 = BoardSquare.where(row: 1, column: "b").first
     coord2 = BoardSquare.where(row: 1, column: "g").first
     coord3 = BoardSquare.where(row: 8, column: "b").first
     coord4 = BoardSquare.where(row: 8, column: "g").first
 
-    GamePiece.create(name: "horse", board_square_id: coord1.id)
-    GamePiece.create(name: "horse", board_square_id: coord2.id)
-    GamePiece.create(name: "horse", board_square_id: coord3.id)
-    GamePiece.create(name: "horse", board_square_id: coord4.id)
+    GamePiece.create(name: "knight", board_square_id: coord1.id)
+    GamePiece.create(name: "knight", board_square_id: coord2.id)
+    GamePiece.create(name: "knight", board_square_id: coord3.id)
+    GamePiece.create(name: "knight", board_square_id: coord4.id)
   end
 
   def reset_bishop
