@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20150309233609) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "board_square_id"
-    t.integer  "user_id"
     t.boolean  "moved",           default: false
+    t.integer  "user_id"
   end
 
   add_index "game_pieces", ["board_square_id"], name: "index_game_pieces_on_board_square_id", using: :btree
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20150309233609) do
     t.text     "omniauth_raw_data"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "token"
+    t.datetime "expires_at"
   end
 
   add_foreign_key "game_pieces", "users"
