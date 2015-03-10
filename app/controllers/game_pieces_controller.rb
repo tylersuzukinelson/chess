@@ -4,6 +4,15 @@ class GamePiecesController < ApplicationController
     game_piece = GamePiece.find params[:id]
     if game_piece.name == "knight"
       get_knight_moves(game_piece.row, game_piece.column)
+    elsif game_piece.name.downcase == "pawn"
+      if !game_piece.moved
+        #pawn's first move
+        get_pawn_initial_moves(game_piece.row, game_piece.column)
+      else
+        #pawn has already moved before
+        get_pawn_moves(game_piece.row, game_piece.column)
+    elsif game_piece.name == "king"
+      get_king_moves(game_piece.row, game_piece.column)
     end
   end
 
@@ -15,6 +24,7 @@ class GamePiecesController < ApplicationController
     valid_rows.include? row && valid_columns.include? column
   end
 
+  #knight moves
   def get_knight_moves(row, column)
     get_knight_up_moves(row, column) + 
     get_knight_down_moves(row, column) + 
@@ -87,6 +97,110 @@ class GamePiecesController < ApplicationController
   def get_knight_right_down_moves(row, column)
     new_row = row + 1
     new_column = (column.ord + 2).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  # pawn moves
+  def get_pawn_initial_moves(row, column)
+    #move pawn forward by one or two board_squares
+    get_pawn_up_moves(row, column) 
+  end
+
+  def get_pawn_up_moves(row, column)
+    get_pawn_up_one(row, column) +
+    get_pawn_up_two(row, column) 
+  end
+
+  def get_pawn_diagonal_moves(row, column)
+    get_pawn_diagonal_right(row, column) +
+    get_pawn_diagonal_left(row, column) 
+  end
+
+  def get_pawn_up_one(row, column)
+    new_row = row - 1
+    new_column = column
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_pawn_up_two(row, column)
+    new_row = row - 2
+    new_column = column
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_pawn_diagonal_right(row, column)
+    new_row = row - 1
+    new_column = (column.ord + 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_pawn_diagonal_left(row, column)
+    new_row = row - 1
+    new_column = (column.ord - 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  #king moves
+  def get_king_moves(row, column)
+    get_king_up_moves(row, column) + 
+    get_king_down_moves(row, column) + 
+    get_king_left_moves(row, column) + 
+    get_king_right_moves(row, column) + 
+    get_king_diagonal_moves(row, column)
+  end
+
+  def get_king_up_moves(row, column)
+    new_row = row - 1
+    new_column = column
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_down_moves(row, column)
+    new_row = row + 1
+    new_column = column
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_left_moves(row, column)
+    new_row = row
+    new_column = (column.ord - 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_right_moves(row, column)
+    new_row = row
+    new_column = (column.ord + 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_diagonal_moves(row, column)
+    get_king_nw_moves(row, column) + 
+    get_king_ne_moves(row, column) + 
+    get_king_sw_moves(row, column) +
+    get_king_se_moves(row, column)
+  end
+
+  def get_king_nw_moves(row, column)
+    new_row = row - 1
+    new_column = (column.ord - 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_ne_moves(row, column)
+    new_row = row - 1
+    new_column = (column.ord + 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_sw_moves(row, column)
+    new_row = row + 1
+    new_column = (column.ord - 1).chr
+    [new_row, new_column] if is_valid_position(new_row, new_column)
+  end
+
+  def get_king_se_moves(row, column)
+    new_row = row + 1
+    new_column = (column.ord + 1).chr
     [new_row, new_column] if is_valid_position(new_row, new_column)
   end
 
