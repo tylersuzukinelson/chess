@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309201826) do
+ActiveRecord::Schema.define(version: 20150309231850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,6 @@ ActiveRecord::Schema.define(version: 20150309201826) do
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "player1"
-    t.integer  "player2"
     t.integer  "player1_id"
     t.integer  "player2_id"
   end
@@ -40,9 +38,11 @@ ActiveRecord::Schema.define(version: 20150309201826) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "board_square_id"
+    t.integer  "user_id"
   end
 
   add_index "game_pieces", ["board_square_id"], name: "index_game_pieces_on_board_square_id", using: :btree
+  add_index "game_pieces", ["user_id"], name: "index_game_pieces_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -58,6 +58,5 @@ ActiveRecord::Schema.define(version: 20150309201826) do
     t.datetime "updated_at",              null: false
   end
 
-  add_foreign_key "boards", "users", column: "player1"
-  add_foreign_key "boards", "users", column: "player2"
+  add_foreign_key "game_pieces", "users"
 end

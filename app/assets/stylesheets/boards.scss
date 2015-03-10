@@ -1,4 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .grid {
+  width: 6em;
+  height: 6em;
   margin-left: 0px !important;
   margin-right: 0px !important;
   display: inline-block;
