@@ -2,7 +2,7 @@
   <% row = 0 %>
   <% cols = 0 %>
   <% @coords.each do |coord| %>
-    <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>">
+    <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>" id="<%= "#{coord.row} #{coord.column}" %>">
       <% if coord.game_piece %>
         <%= coord.game_piece.name %>
       <% else %>
