@@ -2,17 +2,18 @@ class GamePiecesController < ApplicationController
 
   def get_move_set
     game_piece = GamePiece.find params[:id]
+    @possible_moves = [];
     if game_piece.name == "knight"
-      get_knight_moves(game_piece.row, game_piece.column)
+      @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
     elsif game_piece.name.downcase == "pawn"
       if !game_piece.moved
         #pawn's first move
-        get_pawn_initial_moves(game_piece.row, game_piece.column)
+        @possible_moves = get_pawn_initial_moves(game_piece.row, game_piece.column)
       else
         #pawn has already moved before
-        get_pawn_moves(game_piece.row, game_piece.column)
+        @possible_moves = get_pawn_moves(game_piece.row, game_piece.column)
     elsif game_piece.name == "king"
-      get_king_moves(game_piece.row, game_piece.column)
+      @possible_moves = get_king_moves(game_piece.row, game_piece.column)
     end
   end
 
