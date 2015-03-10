@@ -71,7 +71,7 @@ class GamesController < ApplicationController
     coord1 = BoardSquare.where(row: 1, column: "b").first
     coord2 = BoardSquare.where(row: 1, column: "g").first
     coord3 = BoardSquare.where(row: 8, column: "b").first
-    coord4 = BoardSquare.where(row: 8, column: "g").first
+    coord4 = BoardSquare.where(row: 5, column: "g").first
 
     GamePiece.create(name: "knight", board_square_id: coord1.id)
     GamePiece.create(name: "knight", board_square_id: coord2.id)
@@ -83,7 +83,7 @@ class GamesController < ApplicationController
     coord1 = BoardSquare.where(row: 1, column: "c").first
     coord2 = BoardSquare.where(row: 1, column: "f").first
     coord3 = BoardSquare.where(row: 8, column: "c").first
-    coord4 = BoardSquare.where(row: 8, column: "f").first
+    coord4 = BoardSquare.where(row: 4, column: "f").first
 
     GamePiece.create(name: "bishop", board_square_id: coord1.id)
     GamePiece.create(name: "bishop", board_square_id: coord2.id)
@@ -93,7 +93,7 @@ class GamesController < ApplicationController
 
   def reset_queen
     coord1 = BoardSquare.where(row: 1, column: "d").first
-    coord2 = BoardSquare.where(row: 8, column: "d").first
+    coord2 = BoardSquare.where(row: 5, column: "d").first
 
     GamePiece.create(name: "queen", board_square_id: coord1.id)
     GamePiece.create(name: "queen", board_square_id: coord2.id)
