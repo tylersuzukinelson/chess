@@ -161,12 +161,14 @@ class GamePiecesController < ApplicationController
   #king moves
   def get_king_moves(row, column)
     [
-      get_king_up_moves(row, column), 
-      get_king_down_moves(row, column), 
-      get_king_left_moves(row, column), 
-      get_king_right_moves(row, column), 
+      [
+        get_king_up_moves(row, column), 
+        get_king_down_moves(row, column), 
+        get_king_left_moves(row, column), 
+        get_king_right_moves(row, column)
+      ].compact,
       get_king_diagonal_moves(row, column)
-    ].compact
+    ].compact.flatten(1)
   end
 
   def get_king_up_moves(row, column)
