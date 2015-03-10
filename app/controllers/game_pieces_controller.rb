@@ -493,7 +493,6 @@ private
         break
       else
         output << [row, column] if is_valid_position(row, column)      
-        # column = (column.ord + 1).chr
       end
     end  
     output.compact
@@ -513,7 +512,6 @@ private
         break
       else
         output << [row, column] if is_valid_position(row, column)      
-        # column = (column.ord - 1).chr
       end
     end  
     output.compact    
@@ -523,9 +521,10 @@ private
   def get_queen_up_moves(row, column)
     output = []
     while row >= 1
+      row -= 1 
       board_square = BoardSquare.where("row = ?", row).find_by_column column
 
-      if board_square.game_piece
+      if board_square && board_square.game_piece
         if board_square.game_piece.user != current_user
           # encountered opponent's game piece - add space to possible move
           output << [row, column] if is_valid_position(row, column)      
@@ -533,7 +532,7 @@ private
         break
       else
         output << [row, column] if is_valid_position(row, column)      
-        row -= 1 
+        # row -= 1 
       end
     end  
     output.compact      
@@ -542,9 +541,10 @@ private
   def get_queen_down_moves(row, column)
     output = []
     while row <= 8
+      row += 1 
       board_square = BoardSquare.where("row = ?", row).find_by_column column
 
-      if board_square.game_piece
+      if board_square && board_square.game_piece
         if board_square.game_piece.user != current_user
           # encountered opponent's game piece - add space to possible move
           output << [row, column] if is_valid_position(row, column)      
@@ -552,7 +552,6 @@ private
         break
       else
         output << [row, column] if is_valid_position(row, column)      
-        row += 1 
       end
     end  
     output.compact  
