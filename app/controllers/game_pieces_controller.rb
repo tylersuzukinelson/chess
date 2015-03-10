@@ -18,10 +18,12 @@ class GamePiecesController < ApplicationController
       @possible_moves = get_king_moves(game_piece.row, game_piece.column)
     elsif game_piece.name.downcase == "bishop"
       @possible_moves = get_bishop_moves(game_piece.row, game_piece.column)
+    elsif game_piece.name.downcase == "rook"
+      @possible_moves = get_rook_moves(game_piece.row, game_piece.column)
     end
   end
 
-  private
+private
 
   def is_valid_position(row, column)
     valid_rows = [1,2,3,4,5,6,7,8]
@@ -293,5 +295,61 @@ class GamePiecesController < ApplicationController
       row += 1
     end  
     output.compact
+  end
+
+  #rook moves
+  def get_rook_moves(row, column)
+    tmp = [
+      get_rook_horizontal_moves(row, column).flatten(1),
+      get_rook_vertical_moves(row, column).flatten(1)
+    ].flatten(1)
+  end
+
+  def get_rook_horizontal_moves(row, column)
+    get_rook_right_moves(row, column).flatten(1)
+    get_rook_left_moves(row, column).flatten(1)
+  end
+
+  def get_rook_vertical_moves(row, column)
+    get_rook_up_moves(row, column).flatten(1)
+    get_rook_down_moves(row, column).flatter(1)
+  end
+
+  # rook horizontal moves
+  def get_rook_right_moves(row, colum)
+    output = []
+    while column.ord <= 104
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord + 1).chr
+    end  
+    output.compact
+  end
+
+  def get_rook_left_moves(row, colum)
+    output = []
+    while column.ord >= 97
+      output << [row, column] if is_valid_position(row, column)      
+      column = (column.ord - 1).chr
+    end  
+    output.compact    
+  end
+
+  # rook vertical moves
+  def get_rook_up_moves(row, colum)
+   output = []
+    while row >= 1
+      output << [row, column] if is_valid_position(row, column)      
+      row -= 1 
+    end  
+    output.compact      
+  end
+
+  def get_rook_down_moves(row, colum)
+   output = []
+    while row <= 8
+      output << [row, column] if is_valid_position(row, column)      
+      row += 1 
+    end  
+    output.compact  
   end
 end
