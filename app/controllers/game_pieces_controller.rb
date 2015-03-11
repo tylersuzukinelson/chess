@@ -3,10 +3,12 @@ class GamePiecesController < ApplicationController
   def get_move_set
     game_piece = GamePiece.find params[:game_piece_id]
     @possible_moves = [];
-    
-    if game_piece.name == "knight"
+    current_game_piece = game_piece.name
+
+    if current_game_piece.include? "knight"
       @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
-    elsif game_piece.name.downcase == "pawn"
+    
+    elsif current_game_piece.include? "pawn"
       if !game_piece.moved
         #pawn's first move
         @possible_moves = get_pawn_initial_moves(game_piece.row, game_piece.column)
@@ -15,13 +17,17 @@ class GamePiecesController < ApplicationController
         game_piece.moved == true
         @possible_moves = get_pawn_moves(game_piece.row, game_piece.column)
       end
-    elsif game_piece.name == "king"
+    
+    elsif current_game_piece.include? "king"
       @possible_moves = get_king_moves(game_piece.row, game_piece.column)
-    elsif game_piece.name.downcase == "bishop"
+    
+    elsif current_game_piece.include? "bishop"
       @possible_moves = get_bishop_moves(game_piece.row, game_piece.column)
-    elsif game_piece.name.downcase == "rook"
+   
+    elsif current_game_piece.include? "rook"
       @possible_moves = get_rook_moves(game_piece.row, game_piece.column)
-    elsif game_piece.name.downcase == "queen"
+    
+    elsif current_game_piece.include? "queen"
       @possible_moves = get_queen_moves(game_piece.row, game_piece.column)
     end
   end
@@ -189,25 +195,69 @@ private
   def get_king_up_moves(row, column)
     new_row = row - 1
     new_column = column
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_down_moves(row, column)
     new_row = row + 1
     new_column = column
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_left_moves(row, column)
     new_row = row
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_right_moves(row, column)
     new_row = row
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_diagonal_moves(row, column)
@@ -222,25 +272,69 @@ private
   def get_king_nw_moves(row, column)
     new_row = row - 1
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_ne_moves(row, column)
     new_row = row - 1
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_king_sw_moves(row, column)
     new_row = row + 1
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end    
   end
 
   def get_king_se_moves(row, column)
     new_row = row + 1
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   #bishop moves

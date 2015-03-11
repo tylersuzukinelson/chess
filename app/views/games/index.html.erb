@@ -5,8 +5,6 @@
     <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %>" id="<%= "#{coord.row}_#{coord.column}" %>">
       <% if coord.game_piece %>
         <%= link_to image_tag(coord.game_piece.get_game_piece_image), board_game_piece_get_move_set_path(1, coord.game_piece), remote: true %>
-
-
         <%#= link_to coord.game_piece.name, board_game_piece_get_move_set_path(1, coord.game_piece), remote: true %>
       <% else %>
         <%= "#{coord.row} #{coord.column}" %>
