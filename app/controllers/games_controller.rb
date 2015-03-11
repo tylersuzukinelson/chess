@@ -58,7 +58,7 @@ class GamesController < ApplicationController
   def reset_rook
     coord1 = BoardSquare.first
     coord2 = BoardSquare.where(row: 1, column: "h").first
-    coord3 = BoardSquare.where(row: 5 , column: "e").first
+    coord3 = BoardSquare.where(row: 8 , column: "a").first
     coord4 = BoardSquare.last
 
     GamePiece.create(name: "rook", board_square_id: coord1.id)
