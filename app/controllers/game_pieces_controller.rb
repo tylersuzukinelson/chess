@@ -69,13 +69,35 @@ private
   def get_knight_up_left_moves(row, column)
     new_row = row + 2
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_up_right_moves(row, column)
     new_row = row + 2
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_down_moves(row, column)
@@ -88,13 +110,35 @@ private
   def get_knight_down_left_moves(row, column)
     new_row = row - 2
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_down_right_moves(row, column)
     new_row = row - 2
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_left_moves(row, column)
@@ -107,13 +151,35 @@ private
   def get_knight_left_up_moves(row, column)
     new_row = row - 1
     new_column = (column.ord - 2).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end    
   end
 
   def get_knight_left_down_moves(row, column)
     new_row = row + 1
     new_column = (column.ord - 2).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_right_moves(row, column)
@@ -126,13 +192,35 @@ private
   def get_knight_right_up_moves(row, column)
     new_row = row - 1
     new_column = (column.ord + 2).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_knight_right_down_moves(row, column)
     new_row = row + 1
     new_column = (column.ord + 2).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   # pawn moves

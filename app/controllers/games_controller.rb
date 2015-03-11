@@ -101,7 +101,7 @@ class GamesController < ApplicationController
 
   def reset_king
     coord1 = BoardSquare.where(row: 1, column: "e").first
-    coord2 = BoardSquare.where(row: 5, column: "e").first
+    coord2 = BoardSquare.where(row: 8, column: "e").first
 
     GamePiece.create(name: "black-king", board_square_id: coord1.id)
     GamePiece.create(name: "white-king", board_square_id: coord2.id)
