@@ -3,6 +3,7 @@ class GamePiecesController < ApplicationController
   def get_move_set
     game_piece = GamePiece.find params[:game_piece_id]
     @possible_moves = [];
+    
     if game_piece.name == "knight"
       @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
     elsif game_piece.name.downcase == "pawn"
