@@ -257,13 +257,35 @@ private
   def get_pawn_up_one(row, column)
     new_row = row - 1
     new_column = column
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_pawn_up_two(row, column)
     new_row = row - 2
     new_column = column
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square
+      if board_square.game_piece
+        if board_square.game_piece.user != current_user
+          [new_row, new_column] if is_valid_position(new_row, new_column)
+        end
+      else
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_pawn_diagonal_right(row, column)
