@@ -291,13 +291,27 @@ private
   def get_pawn_diagonal_right(row, column)
     new_row = row - 1
     new_column = (column.ord + 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square && board_square.game_piece
+      if board_square.game_piece.user != current_user
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   def get_pawn_diagonal_left(row, column)
     new_row = row - 1
     new_column = (column.ord - 1).chr
-    [new_row, new_column] if is_valid_position(new_row, new_column)
+
+    board_square = BoardSquare.where("row = ?", new_row).find_by_column new_column
+
+    if board_square && board_square.game_piece
+      if board_square.game_piece.user != current_user
+        [new_row, new_column] if is_valid_position(new_row, new_column)
+      end
+    end
   end
 
   #king moves
