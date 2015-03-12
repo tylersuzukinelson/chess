@@ -30,7 +30,7 @@ class GamesController < ApplicationController
     coord25 = BoardSquare.where(row: 7, column: "e").first
     coord26 = BoardSquare.where(row: 7, column: "f").first
     coord27 = BoardSquare.where(row: 7, column: "g").first
-    coord28 = BoardSquare.where(row: 5, column: "h").first
+    coord28 = BoardSquare.where(row: 7, column: "h").first
 
     coord29 = BoardSquare.where(row: 8, column: "e").first
 

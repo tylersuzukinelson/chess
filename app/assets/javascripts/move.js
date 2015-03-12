@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     if(countMoves%2 == 0 && validMove){
       // make a post request!
-      alert('lol');
+      //alert('lol');
     }
     else{
       // nullify moves
