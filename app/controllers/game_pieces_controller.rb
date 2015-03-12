@@ -3,31 +3,34 @@ class GamePiecesController < ApplicationController
   def get_move_set
     game_piece = GamePiece.find params[:game_piece_id]
     @possible_moves = [];
-    current_game_piece = game_piece.name
 
-    if current_game_piece.include? "knight"
+    if game_piece.name.include? "knight"
       @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
     
-    elsif current_game_piece.include? "pawn"
-      if !game_piece.moved
+    elsif game_piece.name.include? "pawn"
+      #if !game_piece.moved
+      if game_piece.row == 7
         #pawn's first move
         @possible_moves = get_pawn_initial_moves(game_piece.row, game_piece.column)
+      elsif game_piece.row == 1
+        #pawn reached other side of board - promotion to queen, knight, rook or bishop
+          
       else
-        #pawn has already moved before
-        game_piece.moved == true
+        #pawn has already moved before and not promotable
+        #game_piece.moved == true
         @possible_moves = get_pawn_moves(game_piece.row, game_piece.column)
       end
     
-    elsif current_game_piece.include? "king"
+    elsif game_piece.name.include? "king"
       @possible_moves = get_king_moves(game_piece.row, game_piece.column)
     
-    elsif current_game_piece.include? "bishop"
+    elsif game_piece.name.include? "bishop"
       @possible_moves = get_bishop_moves(game_piece.row, game_piece.column)
    
-    elsif current_game_piece.include? "rook"
+    elsif game_piece.name.include? "rook"
       @possible_moves = get_rook_moves(game_piece.row, game_piece.column)
     
-    elsif current_game_piece.include? "queen"
+    elsif game_piece.name.include? "queen"
       @possible_moves = get_queen_moves(game_piece.row, game_piece.column)
     end
   end
@@ -225,15 +228,23 @@ private
 
   # pawn moves
   def get_pawn_initial_moves(row, column)
-    #move pawn forward by one or two board_squares
-    get_pawn_up_moves(row, column) 
+    #move pawn forward by one or two board_squares or checks
+    [ 
+      [
+        get_pawn_up_one(row, column), 
+        get_pawn_up_two(row, column), 
+      ].compact,
+      get_pawn_diagonal_moves(row, column)
+    ].compact.flatten(1)
   end
 
-  def get_pawn_up_moves(row, column)
+  def get_pawn_moves(row, column)
     [
-      get_pawn_up_one(row, column), 
-      get_pawn_up_two(row, column)
-    ].compact
+      [
+        get_pawn_up_one(row, column)
+      ].compact,
+      get_pawn_diagonal_moves(row, column)
+    ].compact.flatten(1)
   end
 
   def get_pawn_diagonal_moves(row, column)
