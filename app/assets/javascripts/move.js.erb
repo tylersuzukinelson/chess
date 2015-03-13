@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
-  var origin, destination, validMove;
+  var origin, destination, validMove, current_game_piece;
   //var countMoves = 0;
 
   $('.draggable').draggable({
       start: function(event, ui){
+        current_game_piece = $(this);
         origin = $(this).attr('id'); // obtain origin coordinates of game piece
         console.log("origin: " + origin);
       }
-      
   });
 
   $('.droppable').droppable({
@@ -18,37 +18,23 @@ $(document).ready(function() {
     drop: function(event, ui){
       destination = $(this).attr('id'); // obtain the coordinates of destination square
       console.log("destination: " + destination);
-      // change coordinates of current game piece
-      //var piece_coords = ;
+      
+      var current_board_square = $(this);
+      // set origin coordinates of current game piece to destination coords
+      current_game_piece.attr('id', destination);
+
+      // change board square id associated with game piece
+
+      <%# current_game_piece.board_square_id = current_board_square %>
+
+      //set moved flag for pawn
+      <%# if @coord.game_piece.name.include? "pawn" %>
+      <%# end %>
     }
   });
 
   $('.grid').on('click', function(e) {
     e.preventDefault();  
-
-
-
-    // if(countMoves%2 == 0){
-    //   // determine origin coordinates
-    //   origin = $(this).text().split(' ').join('');
-    // }
-    // else{
-    //   // determine destination coordinates
-    //   //destination = $(this).html().split(' ').join('');
-    //   destination = $(this).text().split(' ');
-    //   validMove = $(this).hasClass('highlight')
-    // }
-    // countMoves++;
-
-    // if(countMoves%2 == 0 && validMove){
-    //   //move piece
-
-    // }
-    // else{
-    //   // nullify moves
-    //   //alert("Not a valid move");
-    // }
-
   });
 
 });

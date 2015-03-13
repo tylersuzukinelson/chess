@@ -8,11 +8,11 @@ class GamePiecesController < ApplicationController
       @possible_moves = get_knight_moves(game_piece.row, game_piece.column)
     
     elsif game_piece.name.include? "pawn"
-      #if !game_piece.moved
-      if game_piece.row == 7
+      if !game_piece.moved
+      #if game_piece.row == 7
         #pawn's first move
         @possible_moves = get_pawn_initial_moves(game_piece.row, game_piece.column)
-      elsif game_piece.row == 1
+      #elsif game_piece.row == 1
         #pawn reached other side of board - promotion to queen, knight, rook or bishop
           
       else
