@@ -2,5 +2,5 @@ $('.grid').removeClass('highlight');
 
 <% @possible_moves.each do |move| %>
 	$('#<%= "#{move[0]}_#{move[1]}" %>').addClass('highlight');
-	$('#<%= "#{move[0]}_#{move[1]}" %>').addClass('droppable');
+	//$('#<%= "#{move[0]}_#{move[1]}" %>').addClass('droppable');  //adds droppable class to only the squares that piece can move to
 <% end %>
