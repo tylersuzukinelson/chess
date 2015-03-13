@@ -4,16 +4,11 @@ $(document).ready(function() {
       validMove;
   var countMoves = 0;
 
-  $( init );
- 
-function init() {
-    $('#draggable').draggable();
-}
-
   $('.grid').on('click', function(e) {
     e.preventDefault();  
 
 
+    $('.draggable').draggable();
 
     // $('.droppable').droppable({
     //   drop: function (event, ui) {
