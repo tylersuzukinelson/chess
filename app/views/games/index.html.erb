@@ -5,8 +5,8 @@
     <div class="grid<%= " grey" if (row.odd? && cols.odd?) || (row.even? && cols.even?) %> droppable" id="<%= "#{coord.row}_#{coord.column}" %>">
       <% if coord.game_piece %>
       <!-- game piece exists on square - add game piece image with draggable class -->        
-        <%= link_to image_tag(coord.game_piece.get_game_piece_image), board_game_piece_get_move_set_path(1, coord.game_piece), remote: true, class: "draggable", id: "#{coord.row}_#{coord.column}" %>        
-        <%#= link_to image_tag(coord.game_piece.get_game_piece_image), board_game_piece_get_move_set_path(1, coord.game_piece), :data => { :game_piece => coord}, remote: true, class: "draggable", id: "#{coord.row}_#{coord.column}" %>
+        <%#= link_to image_tag(coord.game_piece.get_game_piece_image), board_game_piece_get_move_set_path(1, coord.game_piece), remote: true, class: "draggable", id: "#{coord.row}_#{coord.column}" %>        
+        <%= link_to image_tag(coord.game_piece.get_game_piece_image), board_game_piece_get_move_set_path(1, coord.game_piece), :data => { :game_piece => coord.game_piece}, remote: true, class: "draggable", id: "#{coord.row}_#{coord.column}" %>
         <%#= link_to coord.game_piece.name, board_game_piece_get_move_set_path(1, coord.game_piece), remote: true %>
       <% else %>
       <!-- no game piece on this square -->
