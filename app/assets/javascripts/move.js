@@ -7,13 +7,13 @@ $(document).ready(function() {
   $( init );
  
 function init() {
-    $('#draggable').draggable();
 }
 
   $('.grid').on('click', function(e) {
     e.preventDefault();  
 
 
+    $('.draggable').draggable();
 
     // $('.droppable').droppable({
     //   drop: function (event, ui) {
