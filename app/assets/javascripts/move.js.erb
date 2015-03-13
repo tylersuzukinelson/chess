@@ -1,49 +1,53 @@
 $(document).ready(function() {
 
-  var move1, move2,
-      validMove;
-  var countMoves = 0;
+  var origin, destination, validMove;
+  //var countMoves = 0;
 
-  $( init );
- 
-function init() {
-    $('#draggable').draggable();
-}
+  $('.draggable').draggable({
+      start: function(event, ui){
+        origin = $(this).attr('id'); // obtain origin coordinates of game piece
+        console.log("origin: " + origin);
+      }
+      
+  });
+
+  $('.droppable').droppable({
+    accept: ".draggable",
+    //activate:
+    //hoverClass: "drop-hover",
+    drop: function(event, ui){
+      destination = $(this).attr('id'); // obtain the coordinates of destination square
+      console.log("destination: " + destination);
+      // change coordinates of current game piece
+      //var piece_coords = ;
+    }
+  });
 
   $('.grid').on('click', function(e) {
     e.preventDefault();  
 
 
 
-    // $('.droppable').droppable({
-    //   drop: function (event, ui) {
-    //     console.log ("dropped!");
-    //     //$(this).html('dropped!');
-    //   }
-    // });
+    // if(countMoves%2 == 0){
+    //   // determine origin coordinates
+    //   origin = $(this).text().split(' ').join('');
+    // }
+    // else{
+    //   // determine destination coordinates
+    //   //destination = $(this).html().split(' ').join('');
+    //   destination = $(this).text().split(' ');
+    //   validMove = $(this).hasClass('highlight')
+    // }
+    // countMoves++;
 
-    if(countMoves%2 == 0){
-      // determine origin coordinates
-      move1 = $(this).text().split(' ').join('');
-      console.log();
-    }
-    else{
-      // determine destination coordinates
-      //move2 = $(this).html().split(' ').join('');
-      move2 = $(this).text().split(' ');
-      validMove = $(this).hasClass('highlight')
-      console.log(move2);
-    }
-    countMoves++;
+    // if(countMoves%2 == 0 && validMove){
+    //   //move piece
 
-    if(countMoves%2 == 0 && validMove){
-      //move piece
-
-    }
-    else{
-      // nullify moves
-      //alert("Not a valid move");
-    }
+    // }
+    // else{
+    //   // nullify moves
+    //   //alert("Not a valid move");
+    // }
 
   });
 
