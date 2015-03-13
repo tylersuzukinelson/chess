@@ -4,11 +4,6 @@ $(document).ready(function() {
       validMove;
   var countMoves = 0;
 
-  $( init );
- 
-function init() {
-}
-
   $('.grid').on('click', function(e) {
     e.preventDefault();  
 
