@@ -34,23 +34,23 @@ class GamesController < ApplicationController
 
     coord29 = BoardSquare.where(row: 8, column: "e").first
 
-    GamePiece.create(name: "black-pawn", board_square_id: coord11.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord12.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord13.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord14.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord15.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord16.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord17.id)
-    GamePiece.create(name: "black-pawn", board_square_id: coord18.id)
+    black_pawn = GamePiece.create(name: "black-pawn", board_square_id: coord11.id)
+    GamePiece.create(name: "black-pawn", board_square_id: coord12.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord13.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord14.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord15.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord16.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord17.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
+    GamePiece.create(name: "black-pawn", board_square_id: coord18.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-pawn.png"))
 
-    GamePiece.create(name: "white-pawn", board_square_id: coord21.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord22.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord23.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord24.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord25.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord26.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord27.id)
-    GamePiece.create(name: "white-pawn", board_square_id: coord28.id)
+    GamePiece.create(name: "white-pawn", board_square_id: coord21.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord22.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord23.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord24.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord25.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord26.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord27.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
+    GamePiece.create(name: "white-pawn", board_square_id: coord28.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-pawn.png"))
 
     #GamePiece.create(name: "white-king", board_square_id: coord29.id)
   end
@@ -61,10 +61,10 @@ class GamesController < ApplicationController
     coord3 = BoardSquare.where(row: 8 , column: "a").first
     coord4 = BoardSquare.last
 
-    GamePiece.create(name: "black-rook", board_square_id: coord1.id)
-    GamePiece.create(name: "black-rook", board_square_id: coord2.id)
-    GamePiece.create(name: "white-rook", board_square_id: coord3.id)
-    GamePiece.create(name: "white-rook", board_square_id: coord4.id)
+    GamePiece.create(name: "black-rook", board_square_id: coord1.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-rook.png"))
+    GamePiece.create(name: "black-rook", board_square_id: coord2.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-rook.png"))
+    GamePiece.create(name: "white-rook", board_square_id: coord3.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-rook.png"))
+    GamePiece.create(name: "white-rook", board_square_id: coord4.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-rook.png"))
   end
 
   def reset_knight
@@ -73,10 +73,10 @@ class GamesController < ApplicationController
     coord3 = BoardSquare.where(row: 8, column: "b").first
     coord4 = BoardSquare.where(row: 8, column: "g").first
 
-    GamePiece.create(name: "black-knight", board_square_id: coord1.id)
-    GamePiece.create(name: "black-knight", board_square_id: coord2.id)
-    GamePiece.create(name: "white-knight", board_square_id: coord3.id)
-    GamePiece.create(name: "white-knight", board_square_id: coord4.id)
+    GamePiece.create(name: "black-knight", board_square_id: coord1.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-knight.png"))
+    GamePiece.create(name: "black-knight", board_square_id: coord2.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-knight.png"))
+    GamePiece.create(name: "white-knight", board_square_id: coord3.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-knight.png"))
+    GamePiece.create(name: "white-knight", board_square_id: coord4.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-knight.png"))
   end
 
   def reset_bishop
@@ -85,26 +85,26 @@ class GamesController < ApplicationController
     coord3 = BoardSquare.where(row: 8, column: "c").first
     coord4 = BoardSquare.where(row: 8, column: "f").first
 
-    GamePiece.create(name: "black-bishop", board_square_id: coord1.id)
-    GamePiece.create(name: "black-bishop", board_square_id: coord2.id)
-    GamePiece.create(name: "white-bishop", board_square_id: coord3.id)
-    GamePiece.create(name: "white-bishop", board_square_id: coord4.id)
+    GamePiece.create(name: "black-bishop", board_square_id: coord1.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-bishop.png"))
+    GamePiece.create(name: "black-bishop", board_square_id: coord2.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-bishop.png"))
+    GamePiece.create(name: "white-bishop", board_square_id: coord3.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-bishop.png"))
+    GamePiece.create(name: "white-bishop", board_square_id: coord4.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-bishop.png"))
   end
 
   def reset_queen
     coord1 = BoardSquare.where(row: 1, column: "d").first
     coord2 = BoardSquare.where(row: 8, column: "d").first
 
-    GamePiece.create(name: "black-queen", board_square_id: coord1.id)
-    GamePiece.create(name: "white-queen", board_square_id: coord2.id)
+    GamePiece.create(name: "black-queen", board_square_id: coord1.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-queen.png"))
+    GamePiece.create(name: "white-queen", board_square_id: coord2.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-queen.png"))
   end
 
   def reset_king
     coord1 = BoardSquare.where(row: 1, column: "e").first
     coord2 = BoardSquare.where(row: 8, column: "e").first
 
-    GamePiece.create(name: "black-king", board_square_id: coord1.id)
-    GamePiece.create(name: "white-king", board_square_id: coord2.id)
+    GamePiece.create(name: "black-king", board_square_id: coord1.id, :avatar => File.new("#{Rails.root}/app/assets/images/black-king.png"))
+    GamePiece.create(name: "white-king", board_square_id: coord2.id, :avatar => File.new("#{Rails.root}/app/assets/images/white-king.png"))
   end
 
 

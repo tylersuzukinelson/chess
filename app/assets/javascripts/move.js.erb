@@ -4,6 +4,8 @@ $(document).ready(function() {
   //var countMoves = 0;
 
   $('.draggable').draggable({
+      snap: true, 
+
       start: function(event, ui){
         current_game_piece = $(this);
         origin = $(this).attr('id'); // obtain origin coordinates of game piece
@@ -13,9 +15,8 @@ $(document).ready(function() {
 
   $('.droppable').droppable({
     accept: ".draggable",
-    hoverClass: "highlight",
-    //activate:
-    //hoverClass: "drop-hover",
+    hoverClass: "highlight", // highlight the squares where piece can be dropped
+
     drop: function(event, ui){
       destination = $(this).attr('id'); // obtain the coordinates of destination square
       console.log("destination: " + destination);
@@ -25,8 +26,7 @@ $(document).ready(function() {
       current_game_piece.attr('id', destination);
 
       // change board square id associated with game piece
-
-      <%# current_game_piece.board_square_id = current_board_square %>
+      <% current_game_piece.board_square_id = current_board_square %>
 
       //set moved flag for pawn
       <%# if @coord.game_piece.name.include? "pawn" %>
@@ -36,6 +36,7 @@ $(document).ready(function() {
 
   $('.grid').on('click', function(e) {
     e.preventDefault();  
+
   });
 
 });
