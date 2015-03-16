@@ -9,9 +9,6 @@ $(document).ready(function() {
       start: function(event, ui){
         current_game_piece = $(this).data('game-piece');
         origin = current_game_piece.board_square;
-       // origin = $(this).data('game-piece-location'); // obtain origin board square coords of game piece
-        //origin = $(this).data('game-piece').find('board_square_id');
-        //origin = $(this).attr('id'); // obtain board square of origin coordinates of game piece
         console.log("origin: " + origin);
       }
   });
@@ -26,9 +23,12 @@ $(document).ready(function() {
       current_game_piece.board_square = destination; // change origin of game piece to destination board square id
       console.log("destination: " + current_game_piece.board_square);
 
-      <%# current_game_piece.board_square_id = current_board_square %>
-
       //set moved flag for pawn
+      if ( current_game_piece.name.indexOf("pawn") > -1 ){
+        console.log('pawn moved');
+        current_game_piece.moved == true;
+        console.log(current_game_piece.moved);  // not move flag is not setting?
+      }
       <%# if @coord.game_piece.name.include? "pawn" %>
       <%# end %>
     }
