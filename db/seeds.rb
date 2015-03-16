@@ -20,3 +20,5 @@ coords = [
 coords.each do |row, column|
   BoardSquare.create(row: row, column: column)
 end
+
+

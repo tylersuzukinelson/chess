@@ -4,27 +4,27 @@ $(document).ready(function() {
   //var countMoves = 0;
 
   $('.draggable').draggable({
+      snap: true, 
+
       start: function(event, ui){
-        current_game_piece = $(this);
-        origin = $(this).attr('id'); // obtain origin coordinates of game piece
+        current_game_piece = $(this).data('game-piece');
+        origin = current_game_piece.board_square;
+       // origin = $(this).data('game-piece-location'); // obtain origin board square coords of game piece
+        //origin = $(this).data('game-piece').find('board_square_id');
+        //origin = $(this).attr('id'); // obtain board square of origin coordinates of game piece
         console.log("origin: " + origin);
       }
   });
 
   $('.droppable').droppable({
     accept: ".draggable",
-    hoverClass: "highlight",
-    //activate:
-    //hoverClass: "drop-hover",
-    drop: function(event, ui){
-      destination = $(this).attr('id'); // obtain the coordinates of destination square
-      console.log("destination: " + destination);
-      
-      var current_board_square = $(this);
-      // set origin coordinates of current game piece to destination coords
-      current_game_piece.attr('id', destination);
+    hoverClass: "highlight", // highlight the squares where piece can be dropped
 
-      // change board square id associated with game piece
+    drop: function(event, ui){
+      destination = $(this).data('board-square'); // obtain the destination square
+
+      current_game_piece.board_square = destination; // change origin of game piece to destination board square id
+      console.log("destination: " + current_game_piece.board_square);
 
       <%# current_game_piece.board_square_id = current_board_square %>
 
@@ -36,6 +36,7 @@ $(document).ready(function() {
 
   $('.grid').on('click', function(e) {
     e.preventDefault();  
+
   });
 
 });
